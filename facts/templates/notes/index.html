@@ -1,0 +1,32 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<body>
+  <div class="appbar">
+ 
+
+
+
+  </div>
+
+  <div class="container">
+  <form method="post" class="form-card">
+      {% csrf_token %}
+      <label for="descricao">Descricao</label>
+      <input id="descricao" type="text" name="descricao" class="form-card-title" placeholder=""/>      
+      <button class="btn" type="submit">Submit</button>
+     
+
+  </form>
+  </div>
+  <ul class="card-container">
+    {% for note in facts %}
+    <li class="card">
+      <div class="card-title">{{ note.descricao }}</div>
+      <div class="card-likes">{{ note.curtidas }}</div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
