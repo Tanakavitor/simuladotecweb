@@ -15,18 +15,31 @@
   <form method="post" class="form-card">
       {% csrf_token %}
       <label for="descricao">Descricao</label>
-      <input id="descricao" type="text" name="descricao" class="form-card-title" placeholder=""/>      
+      <textarea id="descricao" name="descricao" class="form-card-title" placeholder=""></textarea> 
       <button class="btn" type="submit">Submit</button>
      
 
   </form>
   </div>
-  <ul class="card-container">
-    {% for note in facts %}
-    <li class="card">
-      <div class="card-title">{{ note.descricao }}</div>
-      <div class="card-likes">{{ note.curtidas }}</div>
-    </li>
-    {% endfor %}
-</ul>
+  <style>
+    .card-content {
+        display: flex;
+        width: max-content; /* This will make the div only as wide as its content */
+    }
+    .card-content div:first-child {
+        margin-right: 20px; /* Adds some space to the right of the first div */
+    }
+    </style>
+    
+    <ul class="card-container">
+        {% for note in facts %}
+        <li>
+          <div class="card-content">
+            <div>{{ note.descricao }}</div>
+            <div>{{ note.curtidas }}</div>
+            <a href="{% url 'curtir' note.id %}">Like</a>
+          </div>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
